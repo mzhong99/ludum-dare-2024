@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://40gqary8qec6"]
+
+[ext_resource type="PackedScene" uid="uid://cxcyyqj4vbsj6" path="res://Examples/dank_memes.tscn" id="1_8536u"]
+[ext_resource type="Texture2D" uid="uid://f0idsbv1voql" path="res://Examples/icon.svg" id="2_xhvbm"]
+
+[node name="ExampleArena" type="Node2D"]
+
+[node name="DankMemes" parent="." instance=ExtResource("1_8536u")]
+position = Vector2(171.541, 1.97287)
+
+[node name="Camera2D" type="Camera2D" parent="DankMemes"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_xhvbm")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(656, 248)
+texture = ExtResource("2_xhvbm")

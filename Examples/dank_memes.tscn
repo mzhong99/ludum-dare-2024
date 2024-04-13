@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxcyyqj4vbsj6"]
+
+[ext_resource type="Script" path="res://Examples/dank_memes.gd" id="1_3wkgc"]
+[ext_resource type="Texture2D" uid="uid://f0idsbv1voql" path="res://Examples/icon.svg" id="2_prsij"]
+
+[node name="DankMemes" type="Node2D"]
+script = ExtResource("1_3wkgc")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_prsij")
