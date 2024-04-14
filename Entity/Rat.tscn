@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://yxd5mx136pq3"]
+
+[ext_resource type="Texture2D" uid="uid://c1pgnra6pf7o2" path="res://Assets/rat_1.png" id="1_311fm"]
+[ext_resource type="Script" path="res://Entity/Rat.gd" id="1_i5rul"]
+[ext_resource type="Texture2D" uid="uid://cq0jao01vavyg" path="res://Assets/rat_2.png" id="2_xnulp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kd3gh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_311fm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xnulp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Rat" type="Node2D"]
+script = ExtResource("1_i5rul")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kd3gh")
+frame = 1
+frame_progress = 0.275945
