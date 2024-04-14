@@ -1,22 +1,43 @@
-[gd_scene load_steps=6 format=3 uid="uid://xunr3oc0ogd6"]
+[gd_scene load_steps=8 format=3 uid="uid://xunr3oc0ogd6"]
 
 [ext_resource type="Script" path="res://Entity/UnusedPlayer.gd" id="1_2dtbh"]
-[ext_resource type="Texture2D" uid="uid://f0idsbv1voql" path="res://Examples/icon.svg" id="2_p3v40"]
 [ext_resource type="PackedScene" uid="uid://bj30he4tupx8u" path="res://Skills/SkillBase.tscn" id="3_3ye45"]
 [ext_resource type="PackedScene" uid="uid://2a7lk2v7o5fe" path="res://Skills/Bullet.tscn" id="4_tu746"]
 [ext_resource type="PackedScene" uid="uid://belun4uugbysk" path="res://Skills/Fireball.tscn" id="5_6odcg"]
+[ext_resource type="Texture2D" uid="uid://60ti4an26s0j" path="res://Assets/lich_standing_1.png" id="5_oi3ig"]
+[ext_resource type="Texture2D" uid="uid://64l1majyil6h" path="res://Assets/lich_standing_2.png" id="6_b1aoa"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p14ga"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_oi3ig")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_b1aoa")
+}],
+"loop": true,
+"name": &"walk_idle",
+"speed": 5.0
+}]
 
 [node name="Player" type="Node2D" groups=["PLAYER"]]
 script = ExtResource("1_2dtbh")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_p3v40")
-
 [node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
 
 [node name="BulletSkill" parent="." instance=ExtResource("3_3ye45")]
 skill_spawner = ExtResource("4_tu746")
 
 [node name="FireballSkill" parent="." instance=ExtResource("3_3ye45")]
 skill_spawner = ExtResource("5_6odcg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_p14ga")
+animation = &"walk_idle"
