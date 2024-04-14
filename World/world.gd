@@ -13,7 +13,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	$HUD/ManaBar.value = $Player.mana_current
-	pass
 
 
 func _on_enemy_villager_spawn_timer_timeout():

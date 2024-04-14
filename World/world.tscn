@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbwyemc53vo05"]
+[gd_scene load_steps=8 format=3 uid="uid://dbwyemc53vo05"]
 
 [ext_resource type="Script" path="res://World/world.gd" id="1_g1cg1"]
 [ext_resource type="PackedScene" uid="uid://rt3ivbqd26yj" path="res://Arena/Arena.tscn" id="1_v8yog"]
 [ext_resource type="PackedScene" uid="uid://xunr3oc0ogd6" path="res://Entity/UnusedPlayer.tscn" id="2_4x6t3"]
+[ext_resource type="Script" path="res://World/HUD.gd" id="4_qxuh2"]
 
 [sub_resource type="Curve2D" id="Curve2D_q7v4h"]
 _data = {
@@ -38,7 +39,8 @@ autostart = true
 [node name="TimeElapsed" type="Timer" parent="."]
 autostart = true
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." groups=["HUD"]]
+script = ExtResource("4_qxuh2")
 
 [node name="ElapsedTimeLbl" type="Label" parent="HUD"]
 offset_right = 40.0
