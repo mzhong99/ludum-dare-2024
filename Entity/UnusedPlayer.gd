@@ -10,6 +10,7 @@ extends Node2D
 # ---Movement variables---
 var is_moving = false
 var location_to_move_to = Vector2.ZERO
+var velocity_unit = Vector2.RIGHT
 @export var MOVEMENT_SPEED = 100
 # ---End Movement variables---
 
@@ -41,14 +42,16 @@ func _process(delta):
 	queue_redraw()
 
 func process_movement(delta):
-	if (Input.is_action_just_pressed("gameplay_move_player")):
+	if (Input.is_action_pressed("gameplay_move_player")):
 		is_moving = true
 		location_to_move_to = get_global_mouse_position()
+		velocity_unit = self.global_position.direction_to(location_to_move_to)
 	if (is_moving):
 		var amount_to_move = delta * MOVEMENT_SPEED
-		self.global_position = self.global_position.move_toward(location_to_move_to, amount_to_move)
-		if (self.global_position == location_to_move_to):
+		self.global_position += amount_to_move * velocity_unit
+		if (self.global_position.distance_to(location_to_move_to) < 5):
 			is_moving = false
+			self.global_position = location_to_move_to
 
 func _draw():
 	_draw_spellcast_cooldown_view()
