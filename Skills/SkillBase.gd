@@ -4,6 +4,7 @@ class_name SkillBase
 @export var cooldown_sec: float = 0.5
 @export var windup_sec: float = 0.1
 @export var winddown_sec: float = 0.2
+@export var mana_cost: float = 20.0
 
 @export var skill_spawner: PackedScene
 
