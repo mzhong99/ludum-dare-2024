@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dq06gcj675wla"]
+[gd_scene load_steps=5 format=3 uid="uid://dfamnll8j5lqx"]
 
 [ext_resource type="Script" path="res://Entity/Villager.gd" id="1_ynrj7"]
 [ext_resource type="Texture2D" uid="uid://dp40i7fxe6qg6" path="res://Assets/villager_1.png" id="2_o10jl"]
