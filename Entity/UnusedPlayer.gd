@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @onready var skill_table = {
 	"skill_q": $BulletSkill,
@@ -19,7 +20,7 @@ var health_current: float = health_capacity
 var is_moving = false
 var location_to_move_to = Vector2.ZERO
 var velocity_unit = Vector2.RIGHT
-@export var MOVEMENT_SPEED = 100
+@export var MOVEMENT_SPEED = 115
 # ---End Movement variables---
 
 # Called when the node enters the scene tree for the first time.
@@ -64,6 +65,9 @@ func process_movement(delta):
 		if (self.global_position.distance_to(location_to_move_to) < 2):
 			is_moving = false
 			self.global_position = location_to_move_to
+
+func receive_damage(damage: float):
+	health_current -= damage
 
 # func _draw():
 # 	_draw_spellcast_cooldown_view()

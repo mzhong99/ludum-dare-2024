@@ -2,6 +2,7 @@ extends Node2D
 
 @export var chase_speed: float = 100
 @export var is_enemy: bool = true
+@export var contact_damage: float = 10.0
 
 @onready var animated_sprite = $AnimatedSprite2D
 
@@ -24,4 +25,15 @@ func _process(delta):
 	if target_node2d != null:
 		self.global_position += self.global_position.direction_to(target_node2d.global_position) * chase_speed * delta
 
+# Villagers die in one hit regardless of damage amount
+func receive_damage(_damage: float):
+	self.queue_free()
 
+func _on_area_2d_area_entered(other_area: Area2D):
+	var player_unsafe = get_tree().get_first_node_in_group("PLAYER")
+	if player_unsafe == null:
+		return
+	var player: Player = player_unsafe as Player
+	if other_area.get_parent() == player:
+		player.receive_damage(contact_damage)
+		self.queue_free()

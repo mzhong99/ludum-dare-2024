@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://xunr3oc0ogd6"]
+[gd_scene load_steps=12 format=3 uid="uid://xunr3oc0ogd6"]
 
 [ext_resource type="Script" path="res://Entity/UnusedPlayer.gd" id="1_2dtbh"]
 [ext_resource type="PackedScene" uid="uid://bj30he4tupx8u" path="res://Skills/SkillBase.tscn" id="3_3ye45"]
@@ -39,6 +39,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_1uoak"]
 radius = 32.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_wjcra"]
+radius = 32.0
+
 [node name="Player" type="CharacterBody2D" groups=["PLAYER"]]
 script = ExtResource("1_2dtbh")
 
@@ -61,3 +64,10 @@ shape = SubResource("CircleShape2D_1uoak")
 
 [node name="NodeMonitor" parent="." instance=ExtResource("7_d7vhv")]
 watchlist = Array[String](["mana_current", "health_current"])
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 129
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_wjcra")
