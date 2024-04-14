@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://rt3ivbqd26yj"]
+
+[ext_resource type="Texture2D" uid="uid://p6akp0ek3tbo" path="res://Assets/tempTile.png" id="1_aa1x6"]
+[ext_resource type="Texture2D" uid="uid://bg3ulaqc66cru" path="res://Assets/tempTileWall.png" id="2_yq13s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgusg"]
+size = Vector2(3264, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_53827"]
+size = Vector2(32, 3200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uu5vi"]
+size = Vector2(32, 3200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_upoc6"]
+size = Vector2(3264, 32)
+
+[node name="Arena" type="Node2D"]
+
+[node name="BackgroundTiles" type="TextureRect" parent="."]
+offset_right = 3200.0
+offset_bottom = 3200.0
+texture = ExtResource("1_aa1x6")
+stretch_mode = 1
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="NorthWall" type="TextureRect" parent="Walls"]
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 3232.0
+texture = ExtResource("2_yq13s")
+stretch_mode = 1
+
+[node name="Area2D" type="Area2D" parent="Walls/NorthWall"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/NorthWall/Area2D"]
+position = Vector2(1632, 16)
+shape = SubResource("RectangleShape2D_pgusg")
+
+[node name="WestWall" type="TextureRect" parent="Walls"]
+offset_left = -32.0
+offset_bottom = 3200.0
+texture = ExtResource("2_yq13s")
+stretch_mode = 1
+
+[node name="Area2D" type="Area2D" parent="Walls/WestWall"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WestWall/Area2D"]
+position = Vector2(16, 1600)
+shape = SubResource("RectangleShape2D_53827")
+
+[node name="EastWall" type="TextureRect" parent="Walls"]
+offset_left = 3200.0
+offset_right = 3232.0
+offset_bottom = 3200.0
+texture = ExtResource("2_yq13s")
+stretch_mode = 1
+
+[node name="Area2D" type="Area2D" parent="Walls/EastWall"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/EastWall/Area2D"]
+position = Vector2(16, 1600)
+shape = SubResource("RectangleShape2D_uu5vi")
+
+[node name="SouthWall" type="TextureRect" parent="Walls"]
+offset_left = -32.0
+offset_top = 3200.0
+offset_right = 3232.0
+offset_bottom = 3232.0
+texture = ExtResource("2_yq13s")
+stretch_mode = 1
+
+[node name="Area2D" type="Area2D" parent="Walls/SouthWall"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/SouthWall/Area2D"]
+position = Vector2(1632, 16)
+shape = SubResource("RectangleShape2D_upoc6")
