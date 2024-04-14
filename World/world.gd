@@ -12,8 +12,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# update health and mana bars
 	$HUD/ManaBar.value = $Player.mana_current
-
+	$HUD/HealthBar.value = $Player.health_current
+	
+	# if player is dead, do stuff:
+	if $Player.is_dead:
+		$HUD/Restart.visible = true
 
 func _on_enemy_villager_spawn_timer_timeout():
 	# instantiate mob
@@ -24,7 +29,6 @@ func _on_enemy_villager_spawn_timer_timeout():
 	#mob_spawn_location.position = Vector2(10,10)
 	enemy_villager.position = mob_spawn_location.position
 	
-	print_debug("mob_spawn_location: ", mob_spawn_location.position)
 	add_child(enemy_villager)
 	
 	# update number of enemies spawned counter
@@ -46,7 +50,10 @@ func _on_time_elapsed_timeout():
 	$TimeElapsed.start()
 
 
-
-
 func _update_souls_gathered():
 	$HUD/SoulsGatheredLbl.text = str("Souls Gathered: ", souls_gathered)
+
+
+func _on_player_on_death():
+	print("on_player_on_death")
+	$HUD/Restart.visible = true

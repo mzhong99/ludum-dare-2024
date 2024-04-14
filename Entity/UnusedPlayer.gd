@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+signal on_death
+
 @onready var skill_table = {
 	"skill_q": $BulletSkill,
 	"skill_w": $FireballSkill
@@ -12,7 +14,7 @@ var mana_current: float = 0.0
 
 @export var health_capacity: float = 100.0
 var health_current: float = health_capacity
-var is_dead = false
+var is_dead: bool = false
 var has_done_death_stuff = false
 
 @onready var skill_active: SkillBase = skill_table[skill_table.keys().front()]
@@ -55,12 +57,8 @@ func _process(delta):
 	process_movement(delta)
 	
 	mana_current = min(mana_current + (mana_recharge_pps * delta), mana_capacity)
-
-	# if the lich has no hp AND we haven't done death stuff already, then do a bunch of death stuff
-	if health_current <= 0 and !has_done_death_stuff:
-		has_done_death_stuff = true
-		is_dead = true
-
+	
+	
 	# queue_redraw()
 
 func process_movement(delta):
@@ -81,6 +79,13 @@ func process_movement(delta):
 
 func receive_damage(damage: float):
 	health_current -= damage
+	
+	# if the player has died
+	if health_current <= 0:
+		self.rotate(90)
+		sprite.stop()
+		is_dead = true
+		emit_signal("on_death")
 
 # func _draw():
 # 	_draw_spellcast_cooldown_view()

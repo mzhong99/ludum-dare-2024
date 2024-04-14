@@ -66,6 +66,7 @@ animation = &"casting"
 shape = SubResource("CircleShape2D_1uoak")
 
 [node name="NodeMonitor" parent="." instance=ExtResource("7_d7vhv")]
+visible = false
 watchlist = Array[String](["mana_current", "health_current"])
 
 [node name="HitBox" type="Area2D" parent="."]
