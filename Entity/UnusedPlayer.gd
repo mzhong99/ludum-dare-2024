@@ -6,6 +6,7 @@ extends Node2D
 }
 
 @onready var skill_active: SkillBase = skill_table[skill_table.keys().front()]
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 # ---Movement variables---
 var is_moving = false
@@ -16,7 +17,7 @@ var velocity_unit = Vector2.RIGHT
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	sprite.play("walk_idle")
 
 func _process_spellcast_inputs():
 	if skill_active.is_casting_active():
@@ -39,7 +40,7 @@ func _draw_spellcast_cooldown_view():
 func _process(delta):
 	_process_spellcast_inputs()
 	process_movement(delta)
-	queue_redraw()
+	# queue_redraw()
 
 func process_movement(delta):
 	if (Input.is_action_pressed("gameplay_move_player")):
@@ -53,5 +54,5 @@ func process_movement(delta):
 			is_moving = false
 			self.global_position = location_to_move_to
 
-func _draw():
-	_draw_spellcast_cooldown_view()
+# func _draw():
+# 	_draw_spellcast_cooldown_view()
