@@ -1,14 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://xunr3oc0ogd6"]
+[gd_scene load_steps=11 format=3 uid="uid://xunr3oc0ogd6"]
 
 [ext_resource type="Script" path="res://Entity/UnusedPlayer.gd" id="1_2dtbh"]
 [ext_resource type="PackedScene" uid="uid://bj30he4tupx8u" path="res://Skills/SkillBase.tscn" id="3_3ye45"]
 [ext_resource type="PackedScene" uid="uid://2a7lk2v7o5fe" path="res://Skills/Bullet.tscn" id="4_tu746"]
-[ext_resource type="PackedScene" path="res://Skills/Fireball.tscn" id="5_6odcg"]
+[ext_resource type="PackedScene" uid="uid://belun4uugbysk" path="res://Skills/Fireball.tscn" id="5_6odcg"]
+[ext_resource type="Texture2D" uid="uid://b37pajflyvanb" path="res://Assets/lich_casting.png" id="5_lot2q"]
 [ext_resource type="Texture2D" uid="uid://60ti4an26s0j" path="res://Assets/lich_standing_1.png" id="5_oi3ig"]
 [ext_resource type="Texture2D" uid="uid://64l1majyil6h" path="res://Assets/lich_standing_2.png" id="6_b1aoa"]
+[ext_resource type="PackedScene" uid="uid://cu2lv2kcfurtt" path="res://Utility/NodeMonitor.tscn" id="7_d7vhv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p14ga"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_lot2q")
+}],
+"loop": true,
+"name": &"casting",
+"speed": 5.0
+}, {
 "frames": [],
 "loop": true,
 "name": &"default",
@@ -33,6 +43,7 @@ radius = 32.0
 script = ExtResource("1_2dtbh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 
 [node name="BulletSkill" parent="." instance=ExtResource("3_3ye45")]
@@ -43,7 +54,10 @@ skill_spawner = ExtResource("5_6odcg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p14ga")
-animation = &"walk_idle"
+animation = &"casting"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1uoak")
+
+[node name="NodeMonitor" parent="." instance=ExtResource("7_d7vhv")]
+watchlist = Array[String](["mana_current", "health_current"])
