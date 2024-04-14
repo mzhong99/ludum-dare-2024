@@ -7,6 +7,13 @@ extends Node2D
 
 @onready var skill_active: SkillBase = skill_table[skill_table.keys().front()]
 
+# ---Movement variables---
+var is_moving = false
+var location_to_move_to = Vector2.ZERO
+@export var MOVEMENT_SPEED = 100
+# ---End Movement variables---
+
+# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
@@ -30,7 +37,18 @@ func _draw_spellcast_cooldown_view():
 
 func _process(delta):
 	_process_spellcast_inputs()
+	process_movement(delta)
 	queue_redraw()
+
+func process_movement(delta):
+	if (Input.is_action_just_pressed("gameplay_move_player")):
+		is_moving = true
+		location_to_move_to = get_global_mouse_position()
+	if (is_moving):
+		var amount_to_move = delta * MOVEMENT_SPEED
+		self.global_position = self.global_position.move_toward(location_to_move_to, amount_to_move)
+		if (self.global_position == location_to_move_to):
+			is_moving = false
 
 func _draw():
 	_draw_spellcast_cooldown_view()
