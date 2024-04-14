@@ -5,7 +5,8 @@ signal on_death
 
 @onready var skill_table = {
 	"skill_q": $BulletSkill,
-	"skill_w": $FireballSkill
+	"skill_w": $FireballSkill,
+	"skill_e": $RatSummonSkill
 }
 
 @export var mana_capacity: float = 100.0
@@ -37,11 +38,11 @@ func _process_spellcast_inputs():
 
 	for skill_input in skill_table.keys():
 		var skill_base: SkillBase = skill_table[skill_input] as SkillBase
-		if not Input.is_action_just_released(skill_input):
+		if not Input.is_action_pressed(skill_input):
 			continue
 		if skill_base.mana_cost > self.mana_current:
 			continue
-		if skill_base.start_cast():
+		if skill_base.start_cast(skill_input):
 			self.mana_current -= skill_base.mana_cost
 			skill_active = skill_base
 			return
@@ -71,7 +72,7 @@ func process_movement(delta):
 		is_moving = true
 		location_to_move_to = get_global_mouse_position()
 	if (is_moving):
-		self.velocity = MOVEMENT_SPEED * self.global_position.direction_to(location_to_move_to)
+		self.velocity = self.MOVEMENT_SPEED * self.global_position.direction_to(location_to_move_to)
 		self.move_and_slide()
 		if (self.global_position.distance_to(location_to_move_to) < 2):
 			is_moving = false

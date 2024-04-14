@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://yxd5mx136pq3"]
+[gd_scene load_steps=5 format=3 uid="uid://ccmwh1rj7ngvl"]
 
 [ext_resource type="Texture2D" uid="uid://c1pgnra6pf7o2" path="res://Assets/rat_1.png" id="1_311fm"]
 [ext_resource type="Script" path="res://Entity/Rat.gd" id="1_i5rul"]
