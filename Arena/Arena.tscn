@@ -32,9 +32,9 @@ offset_right = 3232.0
 texture = ExtResource("2_yq13s")
 stretch_mode = 1
 
-[node name="Area2D" type="Area2D" parent="Walls/NorthWall"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls/NorthWall"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/NorthWall/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/NorthWall/StaticBody2D"]
 position = Vector2(1632, 16)
 shape = SubResource("RectangleShape2D_pgusg")
 
@@ -44,7 +44,7 @@ offset_bottom = 3200.0
 texture = ExtResource("2_yq13s")
 stretch_mode = 1
 
-[node name="Area2D" type="Area2D" parent="Walls/WestWall"]
+[node name="Area2D" type="StaticBody2D" parent="Walls/WestWall"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WestWall/Area2D"]
 position = Vector2(16, 1600)
@@ -57,7 +57,7 @@ offset_bottom = 3200.0
 texture = ExtResource("2_yq13s")
 stretch_mode = 1
 
-[node name="Area2D" type="Area2D" parent="Walls/EastWall"]
+[node name="Area2D" type="StaticBody2D" parent="Walls/EastWall"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/EastWall/Area2D"]
 position = Vector2(16, 1600)
@@ -71,7 +71,7 @@ offset_bottom = 3232.0
 texture = ExtResource("2_yq13s")
 stretch_mode = 1
 
-[node name="Area2D" type="Area2D" parent="Walls/SouthWall"]
+[node name="Area2D" type="StaticBody2D" parent="Walls/SouthWall"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/SouthWall/Area2D"]
 position = Vector2(1632, 16)

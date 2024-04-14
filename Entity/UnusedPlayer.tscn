@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://xunr3oc0ogd6"]
+[gd_scene load_steps=9 format=3 uid="uid://xunr3oc0ogd6"]
 
 [ext_resource type="Script" path="res://Entity/UnusedPlayer.gd" id="1_2dtbh"]
 [ext_resource type="PackedScene" uid="uid://bj30he4tupx8u" path="res://Skills/SkillBase.tscn" id="3_3ye45"]
@@ -26,7 +26,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="Node2D" groups=["PLAYER"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_1uoak"]
+radius = 32.0
+
+[node name="Player" type="CharacterBody2D" groups=["PLAYER"]]
 script = ExtResource("1_2dtbh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -41,3 +44,6 @@ skill_spawner = ExtResource("5_6odcg")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p14ga")
 animation = &"walk_idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1uoak")
