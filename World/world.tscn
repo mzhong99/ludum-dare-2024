@@ -1,11 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbwyemc53vo05"]
+[gd_scene load_steps=5 format=3 uid="uid://dbwyemc53vo05"]
 
+[ext_resource type="Script" path="res://World/world.gd" id="1_g1cg1"]
 [ext_resource type="PackedScene" uid="uid://rt3ivbqd26yj" path="res://Arena/Arena.tscn" id="1_v8yog"]
 [ext_resource type="PackedScene" uid="uid://xunr3oc0ogd6" path="res://Entity/UnusedPlayer.tscn" id="2_4x6t3"]
 
+[sub_resource type="Curve2D" id="Curve2D_q7v4h"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 20, 32, 0, 0, 0, 0, 3177, 16, 0, 0, 0, 0, 3181, 3178, 0, 0, 0, 0, 14, 3179, 0, 0, 0, 0, 20, 32)
+}
+point_count = 5
+
 [node name="World" type="Node2D"]
+script = ExtResource("1_g1cg1")
 
 [node name="Arena" parent="." instance=ExtResource("1_v8yog")]
 
+[node name="MobPath" type="Path2D" parent="Arena"]
+curve = SubResource("Curve2D_q7v4h")
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="Arena/MobPath"]
+position = Vector2(20, 32)
+rotation = -0.00506806
+
 [node name="Player" parent="." instance=ExtResource("2_4x6t3")]
 position = Vector2(171, 140)
+
+[node name="EnemyVillagerSpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="EnemyVillagerSpawnTimer" to="." method="_on_enemy_villager_spawn_timer_timeout"]

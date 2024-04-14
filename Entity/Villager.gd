@@ -23,3 +23,5 @@ func _process(delta):
 				target_node2d = candidate
 	if target_node2d != null:
 		self.global_position += self.global_position.direction_to(target_node2d.global_position) * chase_speed * delta
+
+
