@@ -6,18 +6,23 @@ extends Node2D
 @export var player_follow_distance_far = 250
 @export var player_follow_distance_close = 150
 @export var speed = 40
-@export var running_multiplier = 2.0
+@export var running_multiplier = 3
 @export var wander_radius = 40
+@export var attack_radius = 400
 
 enum GOALS {enemy, player, wander, none}
 var goal = GOALS.none
 var wander_target: Vector2
+var enemy_target: Node2D
 
 var rng = RandomNumberGenerator.new()
+
+var rat_size = 32.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	sprite.play()
+	set_rat_size(rat_size)
 	pass # Replace with function body.
 
 
@@ -27,11 +32,42 @@ func _process(delta):
 	pass
 	
 	
+func set_rat_size(size):
+	rat_size = size
+	if (rat_size < 16.0):
+		# the rat fucking dies
+		queue_free()
+	var scale = rat_size / 32.0
+	sprite.scale = Vector2(scale, scale)
+	
+func closeness_needed_to_enemy(enemy):
+	return 16.0 + rat_size/2.0
+	
 # General plan for movement:
 # Rat will randomly wander but stay near player. If an enemy comes close, rat will charge the enemy.
 func process_movement(delta):
 	# If engaged with an enemy, keep doing that
+
+	var enemies = get_tree().get_nodes_in_group("ENEMY")
+	for enemy in enemies:
+		var dist_to_enemy = (enemy.global_position - self.global_position).length()
+		if (dist_to_enemy < attack_radius):
+			goal = GOALS.enemy
+			enemy_target = enemy
+			break
+			
 	if (goal == GOALS.enemy):
+		var amount = delta * speed * running_multiplier
+		if (!is_instance_valid(enemy_target)):
+			goal = GOALS.none
+			return
+		self.global_position = self.global_position.move_toward(enemy_target.global_position, amount)
+		var needed_dist = closeness_needed_to_enemy(enemy_target)
+		if (self.global_position.distance_to(enemy_target.global_position) <= needed_dist):
+			print(enemy_target)
+			enemy_target.receive_damage(1)
+			set_rat_size(rat_size - 4)
+			goal = GOALS.none
 		return
 
 	# Determine if should run to the player now
@@ -47,7 +83,6 @@ func process_movement(delta):
 		return
 	
 	# Wander if nothing else happened
-	print(goal)
 	if (goal == GOALS.wander):
 		var amount = delta * speed
 		self.global_position = self.global_position.move_toward(wander_target, amount)
