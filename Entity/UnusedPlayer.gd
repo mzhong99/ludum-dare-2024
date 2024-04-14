@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 
 @onready var skill_table = {
 	"skill_q": $BulletSkill,
@@ -46,11 +46,10 @@ func process_movement(delta):
 	if (Input.is_action_pressed("gameplay_move_player")):
 		is_moving = true
 		location_to_move_to = get_global_mouse_position()
-		velocity_unit = self.global_position.direction_to(location_to_move_to)
 	if (is_moving):
-		var amount_to_move = delta * MOVEMENT_SPEED
-		self.global_position += amount_to_move * velocity_unit
-		if (self.global_position.distance_to(location_to_move_to) < 5):
+		self.velocity = MOVEMENT_SPEED * self.global_position.direction_to(location_to_move_to)
+		self.move_and_slide()
+		if (self.global_position.distance_to(location_to_move_to) < 2):
 			is_moving = false
 			self.global_position = location_to_move_to
 
