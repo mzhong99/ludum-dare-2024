@@ -4,6 +4,7 @@ extends Node2D
 @export var despawn_sec: float = 2.0
 @export var explode_sec: float = 0.5
 @export var explode_radius: float = 32.0
+@export var damage: float = 10.0
 
 @export var despawn_timer: Timer = Utility.create_timer(self, despawn_sec, "_on_explode", true, true)
 @export var explode_timer: Timer = Utility.create_timer(self, explode_sec, "_despawn")
@@ -47,3 +48,12 @@ func _ready():
 
 func _process(delta: float):
 	self.global_position += delta * velocity_unit * speed_pps
+
+func _on_contact_area_2d_area_entered(area):
+	$DamageArea2D/CollisionShape2D.call_deferred("set_disabled", false)
+
+func _on_damage_area_2d_area_entered(area):
+	var parent: Node2D = area.get_parent() as Node2D
+	if parent.has_method("receive_damage"):
+		parent.receive_damage(damage)
+		_on_explode()

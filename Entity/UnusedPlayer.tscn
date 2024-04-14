@@ -50,6 +50,9 @@ zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 
 [node name="BulletSkill" parent="." instance=ExtResource("3_3ye45")]
+cooldown_sec = 0.3
+windup_sec = 0.05
+mana_cost = 10.0
 skill_spawner = ExtResource("4_tu746")
 
 [node name="FireballSkill" parent="." instance=ExtResource("3_3ye45")]

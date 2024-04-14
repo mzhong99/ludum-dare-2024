@@ -27,6 +27,10 @@ func _process(delta):
 
 # Villagers die in one hit regardless of damage amount
 func receive_damage(_damage: float):
+	var hud = get_tree().get_first_node_in_group("HUD") as CanvasLayer
+	if hud != null:
+		hud.souls_gathered += 1
+		hud.get_node("SoulsGatheredLbl").text = str("Souls Gathered: ", hud.souls_gathered)
 	self.queue_free()
 
 func _on_area_2d_area_entered(other_area: Area2D):

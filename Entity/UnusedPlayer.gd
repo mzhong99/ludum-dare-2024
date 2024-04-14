@@ -12,6 +12,8 @@ var mana_current: float = 0.0
 
 @export var health_capacity: float = 100.0
 var health_current: float = health_capacity
+var is_dead = false
+var has_done_death_stuff = false
 
 @onready var skill_active: SkillBase = skill_table[skill_table.keys().front()]
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -53,9 +55,20 @@ func _process(delta):
 	process_movement(delta)
 	
 	mana_current = min(mana_current + (mana_recharge_pps * delta), mana_capacity)
+
+	# if the lich has no hp AND we haven't done death stuff already, then do a bunch of death stuff
+	if health_current <= 0 and !has_done_death_stuff:
+		has_done_death_stuff = true
+		is_dead = true
+
 	# queue_redraw()
 
 func process_movement(delta):
+	# if dead, no movement
+	if is_dead:
+		return
+	
+	#otherwise, process movement normally
 	if (Input.is_action_pressed("gameplay_move_player")):
 		is_moving = true
 		location_to_move_to = get_global_mouse_position()
