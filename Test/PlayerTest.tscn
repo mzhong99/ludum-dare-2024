@@ -7,5 +7,5 @@
 
 [node name="Player" parent="." instance=ExtResource("1_s26ft")]
 
-[node name="NodeMonitor" parent="Player" instance=ExtResource("2_v10bj")]
+[node name="NodeMonitor2" parent="Player" instance=ExtResource("2_v10bj")]
 watchlist = Array[String](["is_moving", "global_position"])

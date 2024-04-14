@@ -5,7 +5,10 @@ class_name NodeMonitor
 @onready var _global_position_offset = self.global_position 
 
 func _create_property_line(property_name: String):
-	var value = str(self.get_parent().get(property_name))
+	var raw_value = self.get_parent().get(property_name)
+	if typeof(raw_value) == TYPE_FLOAT:
+		raw_value = int(raw_value * 1000) / 1000.0
+	var value = str(raw_value)
 	return "%s: %s\n" % [property_name, value]
 
 func find_parent_node2d():
