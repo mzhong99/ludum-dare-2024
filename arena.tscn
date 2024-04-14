@@ -19,3 +19,4 @@ MOVEMENT_VELOCITY = 300
 texture = ExtResource("3_tah8x")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
