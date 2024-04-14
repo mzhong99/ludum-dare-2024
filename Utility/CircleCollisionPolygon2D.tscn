@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dafgdiqiodtlc"]
 
-[ext_resource type="Script" path="res://utility/CircleCollisionPolygon2D.gd" id="1_bddfg"]
-[ext_resource type="Script" path="res://utility/CirclePolygon2D.gd" id="2_ue5x1"]
+[ext_resource type="Script" path="res://Utility/CircleCollisionPolygon2D.gd" id="1_bddfg"]
+[ext_resource type="Script" path="res://Utility/CirclePolygon2D.gd" id="2_ue5x1"]
 
 [node name="CircleCollisionPolygon2D" type="CollisionPolygon2D"]
 build_mode = 1
