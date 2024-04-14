@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://belun4uugbysk"]
+
+[ext_resource type="Script" path="res://Skills/Fireball.gd" id="1_tyxds"]
+[ext_resource type="Texture2D" uid="uid://bl1dk4jdnspln" path="res://Assets/fireball_1.png" id="2_kvrkc"]
+[ext_resource type="Texture2D" uid="uid://dektk6pgtfltj" path="res://Assets/fireball_2.png" id="3_iawdj"]
+[ext_resource type="Texture2D" uid="uid://bstxo71w0x025" path="res://Assets/explosion_1.png" id="4_2cqbs"]
+[ext_resource type="Texture2D" uid="uid://de4t3g7a51fnt" path="res://Assets/explosion_2.png" id="5_vqlpj"]
+[ext_resource type="Texture2D" uid="uid://bwjkmm7bkln5v" path="res://Assets/explosion_3.png" id="6_e5u1d"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_deyar"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kvrkc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_iawdj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rcxom"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_2cqbs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_vqlpj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_e5u1d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Fireball" type="Node2D"]
+script = ExtResource("1_tyxds")
+
+[node name="BaseAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_deyar")
+
+[node name="Explosions" type="Node2D" parent="."]
+
+[node name="ExplodeAnimatedSprite2D1" type="AnimatedSprite2D" parent="Explosions"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_rcxom")
+
+[node name="ExplodeAnimatedSprite2D2" type="AnimatedSprite2D" parent="Explosions"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_rcxom")
+
+[node name="ExplodeAnimatedSprite2D3" type="AnimatedSprite2D" parent="Explosions"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_rcxom")
+
+[node name="ExplodeAnimatedSprite2D4" type="AnimatedSprite2D" parent="Explosions"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_rcxom")

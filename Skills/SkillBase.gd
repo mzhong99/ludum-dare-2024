@@ -23,6 +23,9 @@ func _on_windup_finished() -> void:
 	child_owner.add_child(skill)
 	skill.global_position = self.get_parent().global_position
 
+func is_windup() -> bool:
+	return windup_timer.time_left > 0
+
 func is_casting_active() -> bool:
 	return windup_timer.time_left > 0 or winddown_timer.time_left > 0
 
@@ -35,6 +38,13 @@ func start_cast() -> bool:
 		cooldown_timer.start()
 		return true
 	return false
+
+func get_cast_percent() -> float:
+	if self.is_windup():
+		return Utility.percent_progress(windup_timer)
+	if self.is_casting_active():
+		return Utility.percent_progress(winddown_timer)
+	return 1.0
 
 func _process(_delta: float):
 	pass

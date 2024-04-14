@@ -1,17 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://xunr3oc0ogd6"]
+[gd_scene load_steps=6 format=3 uid="uid://xunr3oc0ogd6"]
 
 [ext_resource type="Script" path="res://Entity/UnusedPlayer.gd" id="1_2dtbh"]
 [ext_resource type="Texture2D" uid="uid://f0idsbv1voql" path="res://Examples/icon.svg" id="2_p3v40"]
 [ext_resource type="PackedScene" uid="uid://bj30he4tupx8u" path="res://Skills/SkillBase.tscn" id="3_3ye45"]
 [ext_resource type="PackedScene" uid="uid://2a7lk2v7o5fe" path="res://Skills/Bullet.tscn" id="4_tu746"]
+[ext_resource type="PackedScene" uid="uid://belun4uugbysk" path="res://Skills/Fireball.tscn" id="5_6odcg"]
 
 [node name="Player" type="Node2D" groups=["PLAYER"]]
 script = ExtResource("1_2dtbh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_p3v40")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="BulletSkill" parent="." instance=ExtResource("3_3ye45")]
 skill_spawner = ExtResource("4_tu746")
+
+[node name="FireballSkill" parent="." instance=ExtResource("3_3ye45")]
+skill_spawner = ExtResource("5_6odcg")
