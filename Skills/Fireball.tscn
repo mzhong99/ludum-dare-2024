@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://belun4uugbysk"]
+[gd_scene load_steps=11 format=3 uid="uid://belun4uugbysk"]
 
 [ext_resource type="Script" path="res://Skills/Fireball.gd" id="1_tyxds"]
 [ext_resource type="Texture2D" uid="uid://bl1dk4jdnspln" path="res://Assets/fireball_1.png" id="2_kvrkc"]
@@ -38,6 +38,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_hlgud"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2u70s"]
+radius = 32.0
+
 [node name="Fireball" type="Node2D"]
 script = ExtResource("1_tyxds")
 
@@ -61,3 +67,18 @@ sprite_frames = SubResource("SpriteFrames_rcxom")
 [node name="ExplodeAnimatedSprite2D4" type="AnimatedSprite2D" parent="Explosions"]
 visible = false
 sprite_frames = SubResource("SpriteFrames_rcxom")
+
+[node name="DamageArea2D" type="Area2D" parent="."]
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea2D"]
+shape = SubResource("CircleShape2D_hlgud")
+disabled = true
+
+[node name="ContactArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactArea2D"]
+shape = SubResource("CircleShape2D_2u70s")
+
+[connection signal="area_entered" from="DamageArea2D" to="." method="_on_damage_area_2d_area_entered"]
+[connection signal="area_entered" from="ContactArea2D" to="." method="_on_contact_area_2d_area_entered"]
