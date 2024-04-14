@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj30he4tupx8u"]
+
+[ext_resource type="Script" path="res://Skills/SkillBase.gd" id="1_i2kdp"]
+
+[node name="SkillBase" type="Node2D"]
+script = ExtResource("1_i2kdp")

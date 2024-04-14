@@ -6,7 +6,7 @@
 [node name="ExampleArena" type="Node2D"]
 
 [node name="DankMemes" parent="." instance=ExtResource("1_8536u")]
-position = Vector2(171.541, 1.97287)
+position = Vector2(168, 0)
 
 [node name="Camera2D" type="Camera2D" parent="DankMemes"]
 
