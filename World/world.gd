@@ -1,9 +1,12 @@
 extends Node2D
+class_name World
 
 @export var villager_scene: PackedScene = preload("res://Entity/EnemyVillager.tscn")
 var time_elapsed = 0
 var souls_gathered = 0
 var enemies_spawned_count = 0 
+
+signal world_done
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,10 +18,7 @@ func _process(delta):
 	# update health and mana bars
 	$HUD/ManaBar.value = $Player.mana_current
 	$HUD/HealthBar.value = $Player.health_current
-	
-	# if player is dead, do stuff:
-	if $Player.is_dead:
-		$HUD/Restart.visible = true
+
 
 func _on_enemy_villager_spawn_timer_timeout():
 	# instantiate mob
@@ -44,7 +44,7 @@ func _on_time_elapsed_timeout():
 	time_elapsed += 1
 	
 	# redraw time elapsed text on the screen
-	$HUD/ElapsedTimeLbl.text = str("Time Elspased: ", time_elapsed)
+	$HUD/ElapsedTimeLbl.text = str("Time Elapsed: ", time_elapsed)
 	
 	# restart timer
 	$TimeElapsed.start()
@@ -56,4 +56,4 @@ func _update_souls_gathered():
 
 func _on_player_on_death():
 	print("on_player_on_death")
-	$HUD/Restart.visible = true
+	emit_signal("world_done")
