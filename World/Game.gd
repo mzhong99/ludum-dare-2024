@@ -5,6 +5,9 @@ var world = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	world = preload_world.instantiate()
+	add_child(world)
+	world.connect("world_done", _world_completed)
 	pass # Replace with function body.
 
 
@@ -13,7 +16,8 @@ func _process(delta):
 	pass
 
 func _world_completed():
-	$Restart.visible = true
+	print("DEATH DEATH DEATH DEATH DEATH")
+	$CanvasLayer/BoxContainer/Restart.visible = true
 	
 		#world.queue_free()
 
@@ -23,7 +27,7 @@ func _on_restart_pressed():
 	world = preload_world.instantiate()
 	
 	add_child(world)
-	$Restart.visible = false
+	$CanvasLayer/BoxContainer/Restart.visible = false
 	
 	world.connect("world_done", _world_completed)
 

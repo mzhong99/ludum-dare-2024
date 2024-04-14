@@ -1,7 +1,25 @@
 [gd_scene load_steps=3 format=3 uid="uid://mjaa5kxdm2gj"]
 
 [ext_resource type="Script" path="res://World/Game.gd" id="1_ntlwm"]
-[ext_resource type="Script" path="res://World/Restart.gd" id="2_uwgf3"]
+
+[sub_resource type="GDScript" id="GDScript_wyppa"]
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass
+	#self.visible = false
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+
+func _button_pressed():
+	print(\"button PRESSED\")
+"
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -12,22 +30,21 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ntlwm")
 
-[node name="Restart" type="Button" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+offset = Vector2(300, 0)
+transform = Transform2D(1, 0, 0, 1, 300, 0)
+
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer"]
+offset_left = 50.0
+offset_right = 100.0
+offset_bottom = 40.0
+
+[node name="Restart" type="Button" parent="CanvasLayer/BoxContainer"]
+visible = false
 top_level = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -576.0
-offset_top = -324.0
-offset_right = -344.0
-offset_bottom = -228.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Restart"
-script = ExtResource("2_uwgf3")
+script = SubResource("GDScript_wyppa")
 
-[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="CanvasLayer/BoxContainer/Restart" to="." method="_on_restart_pressed"]
