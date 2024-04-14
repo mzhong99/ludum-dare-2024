@@ -1,6 +1,9 @@
 extends Node2D
 
 @export var villager_scene: PackedScene = preload("res://Entity/EnemyVillager.tscn")
+var time_elapsed = 0
+var souls_gathered = 0
+var enemies_spawned_count = 0 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,6 +12,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	$HUD/ManaBar.value = $Player.mana_current
 	pass
 
 
@@ -23,6 +27,27 @@ func _on_enemy_villager_spawn_timer_timeout():
 	
 	print_debug("mob_spawn_location: ", mob_spawn_location.position)
 	add_child(enemy_villager)
-
+	
+	# update number of enemies spawned counter
+	enemies_spawned_count += 1
+	$HUD/EnemiesSpawnedLbl.text = str("Enemies Spawned: ", enemies_spawned_count) 
+	
 	# restart timer
 	$EnemyVillagerSpawnTimer.start()
+
+
+func _on_time_elapsed_timeout():
+	# increase time elapsed
+	time_elapsed += 1
+	
+	# redraw time elapsed text on the screen
+	$HUD/ElapsedTimeLbl.text = str("Time Elspased: ", time_elapsed)
+	
+	# restart timer
+	$TimeElapsed.start()
+
+
+
+
+func _update_souls_gathered():
+	$HUD/SoulsGatheredLbl.text = str("Souls Gathered: ", souls_gathered)

@@ -1,24 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://xunr3oc0ogd6"]
+[gd_scene load_steps=10 format=3 uid="uid://xunr3oc0ogd6"]
 
 [ext_resource type="Script" path="res://Entity/UnusedPlayer.gd" id="1_2dtbh"]
 [ext_resource type="PackedScene" uid="uid://bj30he4tupx8u" path="res://Skills/SkillBase.tscn" id="3_3ye45"]
 [ext_resource type="PackedScene" uid="uid://2a7lk2v7o5fe" path="res://Skills/Bullet.tscn" id="4_tu746"]
-[ext_resource type="PackedScene" uid="uid://belun4uugbysk" path="res://Skills/Fireball.tscn" id="5_6odcg"]
-[ext_resource type="Texture2D" uid="uid://b37pajflyvanb" path="res://Assets/lich_casting.png" id="5_lot2q"]
+[ext_resource type="PackedScene" path="res://Skills/Fireball.tscn" id="5_6odcg"]
 [ext_resource type="Texture2D" uid="uid://60ti4an26s0j" path="res://Assets/lich_standing_1.png" id="5_oi3ig"]
 [ext_resource type="Texture2D" uid="uid://64l1majyil6h" path="res://Assets/lich_standing_2.png" id="6_b1aoa"]
 [ext_resource type="PackedScene" uid="uid://cu2lv2kcfurtt" path="res://Utility/NodeMonitor.tscn" id="7_d7vhv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p14ga"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_lot2q")
-}],
-"loop": true,
-"name": &"casting",
-"speed": 5.0
-}, {
 "frames": [],
 "loop": true,
 "name": &"default",
@@ -37,9 +28,6 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1uoak"]
-radius = 32.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_wjcra"]
 radius = 32.0
 
 [node name="Player" type="CharacterBody2D" groups=["PLAYER"]]
@@ -64,10 +52,3 @@ shape = SubResource("CircleShape2D_1uoak")
 
 [node name="NodeMonitor" parent="." instance=ExtResource("7_d7vhv")]
 watchlist = Array[String](["mana_current", "health_current"])
-
-[node name="HitBox" type="Area2D" parent="."]
-collision_layer = 129
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-shape = SubResource("CircleShape2D_wjcra")

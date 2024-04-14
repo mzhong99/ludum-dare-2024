@@ -53,6 +53,7 @@ func _process(delta):
 	process_movement(delta)
 	
 	mana_current = min(mana_current + (mana_recharge_pps * delta), mana_capacity)
+
 	# queue_redraw()
 
 func process_movement(delta):

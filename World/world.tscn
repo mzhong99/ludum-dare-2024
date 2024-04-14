@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbwyemc53vo05"]
+[gd_scene load_steps=7 format=3 uid="uid://dbwyemc53vo05"]
 
 [ext_resource type="Script" path="res://World/world.gd" id="1_g1cg1"]
 [ext_resource type="PackedScene" uid="uid://rt3ivbqd26yj" path="res://Arena/Arena.tscn" id="1_v8yog"]
@@ -10,8 +10,15 @@ _data = {
 }
 point_count = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fwhgh"]
+bg_color = Color(0.638591, 0.184806, 0.161478, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbinp"]
+bg_color = Color(0.180392, 0.278431, 0.658824, 1)
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_g1cg1")
+metadata/_edit_vertical_guides_ = [-557.0]
 
 [node name="Arena" parent="." instance=ExtResource("1_v8yog")]
 
@@ -28,4 +35,66 @@ position = Vector2(171, 140)
 [node name="EnemyVillagerSpawnTimer" type="Timer" parent="."]
 autostart = true
 
+[node name="TimeElapsed" type="Timer" parent="."]
+autostart = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="ElapsedTimeLbl" type="Label" parent="HUD"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 36
+text = "Time Elapsed: "
+
+[node name="SoulsGatheredLbl" type="Label" parent="HUD"]
+offset_top = 50.0
+offset_right = 285.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 36
+text = "Souls Gathered: "
+
+[node name="EnemiesSpawnedLbl" type="Label" parent="HUD"]
+offset_top = 100.0
+offset_right = 338.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 36
+text = "ENemies Spawned: "
+
+[node name="HealthBar" type="ProgressBar" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = 12.0
+offset_right = 86.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(100, -75)
+size_flags_horizontal = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_fwhgh")
+value = 100.0
+
+[node name="ManaBar" type="ProgressBar" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -60.0
+offset_right = 86.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(100, -200)
+size_flags_horizontal = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_cbinp")
+value = 50.0
+
 [connection signal="timeout" from="EnemyVillagerSpawnTimer" to="." method="_on_enemy_villager_spawn_timer_timeout"]
+[connection signal="timeout" from="TimeElapsed" to="." method="_on_time_elapsed_timeout"]
