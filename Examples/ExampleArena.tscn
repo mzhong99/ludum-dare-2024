@@ -9,6 +9,7 @@
 position = Vector2(171.541, 1.97287)
 
 [node name="Camera2D" type="Camera2D" parent="DankMemes"]
+position_smoothing_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_xhvbm")
